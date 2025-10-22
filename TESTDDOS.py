@@ -1,3 +1,13 @@
+# Untuk Linux - Tingkatkan system limits
+sudo sysctl -w net.ipv4.ip_local_port_range="1024 65535"
+sudo sysctl -w net.ipv4.tcp_tw_reuse=1
+sudo ulimit -n 1000000
+
+# Untuk performance maksimal
+echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+
+
 #!/usr/bin/env python
 # YOGI X_ZXPLOIT ULTIMATE - Project Armageddon Pro Max Ultra+ (True Ghost Edition) v2.1
 # HYPER-OPTIMIZED FOR 8GB RAM / 8 CORE SYSTEMS | ZERO-DELAY QUANTUM ATTACKS
