@@ -1,0 +1,127 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOT7NG/iF3mbIY9Yk+vM6ic",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/wwefinfk/yogiddos/blob/main/index.html\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install firecrawl-py"
+      ],
+      "metadata": {
+        "id": "tv3Z_Dh_WWWe",
+        "outputId": "f4487904-341e-4df0-c2b6-fe2983a5ddcd",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: firecrawl-py in /usr/local/lib/python3.12/dist-packages (4.18.0)\n",
+            "Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from firecrawl-py) (2.32.4)\n",
+            "Requirement already satisfied: httpx in /usr/local/lib/python3.12/dist-packages (from firecrawl-py) (0.28.1)\n",
+            "Requirement already satisfied: python-dotenv in /usr/local/lib/python3.12/dist-packages (from firecrawl-py) (1.2.1)\n",
+            "Requirement already satisfied: websockets in /usr/local/lib/python3.12/dist-packages (from firecrawl-py) (15.0.1)\n",
+            "Requirement already satisfied: nest-asyncio in /usr/local/lib/python3.12/dist-packages (from firecrawl-py) (1.6.0)\n",
+            "Requirement already satisfied: pydantic>=2.0 in /usr/local/lib/python3.12/dist-packages (from firecrawl-py) (2.12.3)\n",
+            "Requirement already satisfied: aiohttp in /usr/local/lib/python3.12/dist-packages (from firecrawl-py) (3.13.3)\n",
+            "Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2.0->firecrawl-py) (0.7.0)\n",
+            "Requirement already satisfied: pydantic-core==2.41.4 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2.0->firecrawl-py) (2.41.4)\n",
+            "Requirement already satisfied: typing-extensions>=4.14.1 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2.0->firecrawl-py) (4.15.0)\n",
+            "Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2.0->firecrawl-py) (0.4.2)\n",
+            "Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp->firecrawl-py) (2.6.1)\n",
+            "Requirement already satisfied: aiosignal>=1.4.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp->firecrawl-py) (1.4.0)\n",
+            "Requirement already satisfied: attrs>=17.3.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp->firecrawl-py) (25.4.0)\n",
+            "Requirement already satisfied: frozenlist>=1.1.1 in /usr/local/lib/python3.12/dist-packages (from aiohttp->firecrawl-py) (1.8.0)\n",
+            "Requirement already satisfied: multidict<7.0,>=4.5 in /usr/local/lib/python3.12/dist-packages (from aiohttp->firecrawl-py) (6.7.1)\n",
+            "Requirement already satisfied: propcache>=0.2.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp->firecrawl-py) (0.4.1)\n",
+            "Requirement already satisfied: yarl<2.0,>=1.17.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp->firecrawl-py) (1.22.0)\n",
+            "Requirement already satisfied: anyio in /usr/local/lib/python3.12/dist-packages (from httpx->firecrawl-py) (4.12.1)\n",
+            "Requirement already satisfied: certifi in /usr/local/lib/python3.12/dist-packages (from httpx->firecrawl-py) (2026.2.25)\n",
+            "Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.12/dist-packages (from httpx->firecrawl-py) (1.0.9)\n",
+            "Requirement already satisfied: idna in /usr/local/lib/python3.12/dist-packages (from httpx->firecrawl-py) (3.11)\n",
+            "Requirement already satisfied: h11>=0.16 in /usr/local/lib/python3.12/dist-packages (from httpcore==1.*->httpx->firecrawl-py) (0.16.0)\n",
+            "Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->firecrawl-py) (3.4.4)\n",
+            "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->firecrawl-py) (2.5.0)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "from firecrawl import Firecrawl\n",
+        "\n",
+        "app = Firecrawl(api_key=\"fc-1b6e12e44b324e93ad9543780b73b9e7\")\n",
+        "\n",
+        "crawl = app.crawl(\n",
+        "    \"https://vocagame.com\",\n",
+        "    limit=10\n",
+        ")"
+      ],
+      "metadata": {
+        "id": "Xu7u43JgWeDD"
+      },
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "html = \"\"\"\n",
+        "<html>\n",
+        "<head>\n",
+        "<title>Vocagame Scraper</title>\n",
+        "<link rel=\"stylesheet\" href=\"style.css\">\n",
+        "</head>\n",
+        "<body>\n",
+        "\n",
+        "<h1>Hasil Scraper Vocagame</h1>\n",
+        "\"\"\"\n",
+        "\n",
+        "for page in crawl.data:\n",
+        "    html += f\"<h2>{page.metadata.title}</h2>\"\n",
+        "    html += f\"<p>{page.markdown[:500]}</p>\"\n",
+        "\n",
+        "html += \"</body></html>\"\n",
+        "\n",
+        "with open(\"index.html\",\"w\") as f:\n",
+        "    f.write(html)"
+      ],
+      "metadata": {
+        "id": "_nmEf4cAW2va"
+      },
+      "execution_count": 8,
+      "outputs": []
+    }
+  ]
+}
